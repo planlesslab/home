@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WeBringo – Planless Lab</title>
+<meta name="description" content="WeBringo: fill your card with topics, then listen. Every mention scores. Play it live with friends.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%AA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef0ff;--ink:#1c2155;--muted:#4b517f;--blue:#4452ee;--coral:#ff6b57;--card:#fbfbff;--line:#d5d9f7;
+--display:"Bricolage Grotesque","Trebuchet MS",sans-serif;--body:"Figtree","Segoe UI",system-ui,sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(--body)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+
+.nav{position:sticky;top:0;z-index:20;background:rgba(238,240,255,.88);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .in{max-width:1280px;margin:0 auto;padding:.65rem 1.5rem;display:flex;align-items:center;gap:1.25rem}
+.brand{font:800 1.2rem var(--display);letter-spacing:-.02em;text-decoration:none;white-space:nowrap}
+.nav ul{flex:1;min-width:0;display:flex;justify-content:flex-end;gap:.2rem;list-style:none;margin:0;padding:0;overflow-x:auto;scrollbar-width:none}
+.nav ul::-webkit-scrollbar{display:none}
+.nav ul a{display:block;padding:.4rem .85rem;border-radius:99px;font:600 .95rem var(--body);text-decoration:none;color:var(--muted);white-space:nowrap}
+.nav ul a:hover{background:#e3e6ff;color:var(--ink)}
+.card{scroll-margin-top:5rem}
+.hero{--x:50%;--y:40%;position:relative;overflow:hidden;color:#fff;
+ background:linear-gradient(180deg,#3a45d6 0%,#5562f4 100%);padding:clamp(4rem,12vw,9rem) 1.5rem clamp(4rem,10vw,7rem)}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:repeating-linear-gradient(90deg,rgba(255,255,255,.2) 0 2px,rgba(255,255,255,0) 2px 9px)}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(260px 340px at var(--x) var(--y),rgba(255,255,255,.55),rgba(255,255,255,0) 70%);mix-blend-mode:soft-light}
+.strip{position:absolute;width:clamp(26px,4vw,52px);border-radius:99px;pointer-events:none;filter:blur(14px);opacity:.75;background:linear-gradient(180deg,rgba(214,224,255,0),rgba(214,224,255,.85) 30%,rgba(214,224,255,.85) 70%,rgba(214,224,255,0))}
+.inner{position:relative;z-index:1;max-width:1280px;margin:0 auto;text-shadow:0 2px 24px rgba(28,33,120,.55)}
+.hero h1{font:800 clamp(3.2rem,11vw,8rem)/.95 var(--display);letter-spacing:-.03em;margin:0 0 1.5rem}
+.hero p.lede{font-size:clamp(1.15rem,2.4vw,1.6rem);max-width:30ch;margin:0;font-weight:500}
+
+.promise-band{max-width:1280px;margin:0 auto;padding:clamp(3.5rem,8vw,6rem) 1.5rem 0}
+.promise-band p{font:500 clamp(1.6rem,3.6vw,2.8rem)/1.2 var(--display);letter-spacing:-.02em;max-width:26ch;margin:0}
+main{max-width:1280px;margin:0 auto;padding:clamp(2.5rem,6vw,4rem) 1.5rem 4rem}
+.head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:1.25rem;margin-bottom:2rem}
+h2{font:800 clamp(1.8rem,4vw,2.6rem)/1.1 var(--display);letter-spacing:-.02em;margin:0}
+.filters{display:flex;flex-wrap:wrap;gap:.5rem}
+.filters button{font:600 .95rem var(--body);color:var(--ink);background:transparent;border:1.5px solid var(--line);border-radius:99px;padding:.4rem 1rem;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:1.25rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column}
+.card[hidden]{display:none}
+.card img{display:block;width:100%;height:auto;aspect-ratio:1/1}
+.body{padding:1.1rem 1.15rem 1.3rem;display:flex;flex-direction:column;gap:.7rem;flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.tag{font:600 .85rem var(--body);color:var(--blue);background:#e3e6ff;border-radius:8px;padding:.15rem .6rem}
+.tag.seasonal{color:#a8321f;background:#ffe4de}
+h3{font:800 1.4rem/1.15 var(--display);letter-spacing:-.01em;margin:0}
+.body p.fact{font-weight:600;color:var(--ink);margin:-.3rem 0 0}
+.body p{margin:0;color:var(--muted);font-size:.98rem;line-height:1.5}
+.play{margin-top:auto;align-self:flex-start;font:800 1.05rem var(--display);background:var(--blue);color:#fff;text-decoration:none;padding:.7rem 1.4rem;border-radius:99px;transition:background .2s}
+.play:hover{background:var(--ink)}
+footer p{margin:.3rem 0}
+footer .suggest{color:var(--ink);font-weight:600}
+footer{border-top:1px solid var(--line);padding:2rem 1.5rem;text-align:center;color:var(--muted);font-size:.95rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.play{transition:none}}
+
+.embed-page{max-width:1280px;margin:0 auto;padding:1.75rem 1.5rem 4rem}
+.back{display:inline-block;font:600 .95rem var(--body);color:var(--muted);text-decoration:none;margin-bottom:1.25rem}
+.back:hover{color:var(--ink);text-decoration:underline}
+.ehead{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:1.25rem;margin-bottom:1.5rem}
+.ehead h1{font:800 clamp(2.4rem,6vw,4rem)/1 var(--display);letter-spacing:-.03em;margin:.6rem 0 .5rem}
+.ehead p{margin:0;color:var(--muted);max-width:52ch}
+.ehead .play{margin:0}
+.frame{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#fff}
+.frame iframe{display:block;width:100%;height:clamp(640px,85vh,920px);border:0}
+</style>
+</head>
+<body id="top">
+<nav class="nav" aria-label="Main"><div class="in">
+ <a class="brand" href="index.html">Planless Lab</a>
+ <ul>
+  <li><a href="index.html#spontaneous-walkie">Spontaneous Walkie</a></li>
+  <li><a href="webringo.html" aria-current="page">WeBringo</a></li>
+  <li><a href="index.html#chaoticparty">ChaoticParty</a></li>
+  <li><a href="index.html#shake-off">ChristmasShake-Off!</a></li>
+ </ul>
+</div></nav>
+<main class="embed-page">
+ <a class="back" href="index.html">← All projects</a>
+ <div class="ehead">
+  <div>
+   <div class="tags"><span class="tag">Group party</span></div>
+   <h1>WeBringo</h1>
+   <p>Fill your card with topics, then listen. Every time one comes up in conversation it scores, and repeats count too. 2–8 players.</p>
+  </div>
+ </div>
+ <div class="frame">
+  <iframe src="https://webringo.lovable.app/" title="WeBringo game" loading="lazy" allow="clipboard-write; fullscreen"></iframe>
+ </div>
+</main>
+<footer><p class="suggest">Got an idea for a real-world experience? <a href="#">Suggest an experience</a></p><p>Planless Lab · IRL Experience Lab</p></footer>
+</body>
+</html>
