@@ -3,8 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WeBringo – Planless Lab</title>
-<meta name="description" content="WeBringo: fill your card with topics, then listen. Every mention scores. Play it live with friends.">
+<title>WeBringo – Conversation Bingo &amp; Icebreaker Party Game</title>
+<meta name="description" content="Turn conversations into a game with WeBringo! A fun conversation bingo and icebreaker game for friends, parties and social gatherings. Play with 2–8 people.">
+<meta property="og:title" content="WeBringo – Conversation Bingo &amp; Icebreaker Party Game">
+<meta property="og:description" content="Turn conversations into a game with WeBringo! A fun conversation bingo and icebreaker game for friends, parties and social gatherings. Play with 2–8 people.">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "WeBringo – Conversation Bingo & Icebreaker Party Game", "description": "WeBringo is a 2–8 player conversation bingo game designed for icebreakers, parties and social gatherings. Players create topic cards and score points when those topics are mentioned in conversation."}</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%AA%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,6 +51,12 @@ h2{font:800 clamp(1.8rem,4vw,2.6rem)/1.1 var(--display);letter-spacing:-.02em;ma
 
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:1.25rem}
 .card{background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column}
+.card{position:relative;transition:border-color .2s}
+.card:hover{border-color:var(--blue)}
+.card:hover .play{background:var(--ink)}
+.card:has(.play:focus-visible){outline:3px solid var(--coral);outline-offset:3px}
+.play:focus-visible{outline:none}
+.play::after{content:"";position:absolute;inset:0;border-radius:22px}
 .card[hidden]{display:none}
 .card img{display:block;width:100%;height:auto;aspect-ratio:1/1}
 .body{padding:1.1rem 1.15rem 1.3rem;display:flex;flex-direction:column;gap:.7rem;flex:1}
@@ -62,15 +71,19 @@ h3{font:800 1.4rem/1.15 var(--display);letter-spacing:-.01em;margin:0}
 footer p{margin:.3rem 0}
 footer .suggest{color:var(--ink);font-weight:600}
 footer{border-top:1px solid var(--line);padding:2rem 1.5rem;text-align:center;color:var(--muted);font-size:.95rem}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.play{transition:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.play,.card{transition:none}}
 
 .embed-page{max-width:1280px;margin:0 auto;padding:1.75rem 1.5rem 4rem}
 .back{display:inline-block;font:600 .95rem var(--body);color:var(--muted);text-decoration:none;margin-bottom:1.25rem}
 .back:hover{color:var(--ink);text-decoration:underline}
-.ehead{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:1.25rem;margin-bottom:1.5rem}
-.ehead h1{font:800 clamp(2.4rem,6vw,4rem)/1 var(--display);letter-spacing:-.03em;margin:.6rem 0 .5rem}
-.ehead p{margin:0;color:var(--muted);max-width:52ch}
-.ehead .play{margin:0}
+.ehead h1{font:800 clamp(2.4rem,6vw,4rem)/1 var(--display);letter-spacing:-.03em;margin:.6rem 0 .7rem}
+.short{font:500 clamp(1.2rem,2.4vw,1.6rem)/1.3 var(--display);margin:0 0 2rem}
+.info{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:2rem;margin-bottom:2rem;align-items:start}
+.desc p{margin:0 0 1rem;color:var(--muted);max-width:60ch}
+.meta{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.6rem 1.25rem;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.2rem 1.4rem}
+.meta dt{font:600 .9rem var(--body);color:var(--muted)}
+.meta dd{margin:0;font-weight:600}
+@media(max-width:800px){.info{grid-template-columns:1fr}}
 .frame{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#fff}
 .frame iframe{display:block;width:100%;height:clamp(640px,85vh,920px);border:0}
 </style>
@@ -79,20 +92,21 @@ footer{border-top:1px solid var(--line);padding:2rem 1.5rem;text-align:center;co
 <nav class="nav" aria-label="Main"><div class="in">
  <a class="brand" href="index.html">Planless Lab</a>
  <ul>
-  <li><a href="index.html#spontaneous-walkie">Spontaneous Walkie</a></li>
   <li><a href="webringo.html" aria-current="page">WeBringo</a></li>
   <li><a href="chaoticparty.html">ChaoticParty</a></li>
-  <li><a href="index.html#shake-off">ChristmasShake-Off!</a></li>
+  <li><a href="bauble-shake.html">Bauble-Shake</a></li>
  </ul>
 </div></nav>
 <main class="embed-page">
  <a class="back" href="index.html">← All projects</a>
  <div class="ehead">
-  <div>
-   <div class="tags"><span class="tag">Group party</span></div>
-   <h1>WeBringo</h1>
-   <p>Fill your card with topics, then listen. Every time one comes up in conversation it scores, and repeats count too. 2–8 players.</p>
-  </div>
+  <div class="tags"><span class="tag">Group party</span></div>
+  <h1>WeBringo</h1>
+  <p class="short">Turn everyday conversations into a game.</p>
+ </div>
+ <div class="info">
+  <div class="desc"><p>WeBringo is a conversation bingo game for friends, parties and social gatherings. Fill your bingo card with topics, then listen out for them as the conversation unfolds. Score points whenever a topic comes up — even repeated mentions count!</p><p>A playful icebreaker that gets people talking, listening and laughing together.</p></div>
+  <dl class="meta"><dt>Category</dt><dd>Icebreaker Games, Party Games</dd><dt>Players</dt><dd>2–8</dd><dt>Play format</dt><dd>Virtual, In-person, Hybrid</dd><dt>Device</dt><dd>Mobile / Web</dd><dt>Occasions</dt><dd>Friends, Parties, Social Gatherings, Meetups</dd><dt>Game type</dt><dd>Conversation / Bingo</dd></dl>
  </div>
  <div class="frame">
   <iframe src="https://webringo.lovable.app/" title="WeBringo game" loading="lazy" allow="clipboard-write; fullscreen"></iframe>
