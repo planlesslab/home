@@ -6,6 +6,7 @@
 <title>Planless Lab – IRL Experience Lab</title>
 <meta name="description" content="Planless Lab is an IRL experience lab: a playground for real-world experiences.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%AA%3C/text%3E%3C/svg%3E">
+<script src="https://planlesslab.github.io/home/nav.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
@@ -18,13 +19,6 @@ body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.6 var(-
 a{color:inherit}
 :focus-visible{outline:3px solid var(--coral);outline-offset:3px}
 
-.nav{position:sticky;top:0;z-index:20;background:rgba(238,240,255,.88);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.nav .in{max-width:1280px;margin:0 auto;padding:.65rem 1.5rem;display:flex;align-items:center;gap:1.25rem}
-.brand{font:800 1.2rem var(--display);letter-spacing:-.02em;text-decoration:none;white-space:nowrap}
-.nav ul{flex:1;min-width:0;display:flex;justify-content:flex-end;gap:.2rem;list-style:none;margin:0;padding:0;overflow-x:auto;scrollbar-width:none}
-.nav ul::-webkit-scrollbar{display:none}
-.nav ul a{display:block;padding:.4rem .85rem;border-radius:99px;font:600 .95rem var(--body);text-decoration:none;color:var(--muted);white-space:nowrap}
-.nav ul a:hover{background:#e3e6ff;color:var(--ink)}
 .card{scroll-margin-top:5rem}
 .hero{--x:50%;--y:40%;position:relative;overflow:hidden;color:#fff;
  background:linear-gradient(180deg,#3a45d6 0%,#5562f4 100%);padding:clamp(4rem,12vw,9rem) 1.5rem clamp(4rem,10vw,7rem)}
@@ -72,14 +66,6 @@ footer{border-top:1px solid var(--line);padding:2rem 1.5rem;text-align:center;co
 </style>
 </head>
 <body id="top">
-<nav class="nav" aria-label="Main"><div class="in">
- <a class="brand" href="#top">Planless Lab</a>
- <ul>
-  <li><a href="https://planlesslab.github.io/WeBringo/">WeBringo</a></li>
-  <li><a href="https://planlesslab.github.io/ChaoticParty/">ChaoticParty</a></li>
-  <li><a href="https://planlesslab.github.io/Bauble-Shake/">Bauble-Shake</a></li>
- </ul>
-</div></nav>
 <header class="hero" id="hero">
  <span class="strip" style="left:4%;top:55%;height:200px"></span>
  <span class="strip" style="left:66%;top:6%;height:190px"></span>
